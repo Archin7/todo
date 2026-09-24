@@ -1,0 +1,15 @@
+div > * {
+  border: none;
+  border-radius: 5px;
+}
+
+.remove-todo {
+  background-color: tomato;
+}
+
+.add-todos > * {
+  color: black;
+  margin: 5px;
+  background-color: rgb(220, 228, 255);
+  padding: 4px;
+}
