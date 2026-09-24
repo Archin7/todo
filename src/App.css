@@ -1,13 +1,23 @@
 div > * {
-  border: none;
   border-radius: 5px;
 }
 
-.remove-todo {
-  background-color: tomato;
+.todos {
+  li {
+    font-size: small;
+    font-weight: 500;
+    color: rgb(220, 228, 255);
+  }
+
+  .remove-todo {
+    border: none;
+    background-color: tomato;
+  }
 }
 
 .add-todos > * {
+  border: none;
+  border-bottom: 2px solid darkblue;
   color: black;
   margin: 5px;
   background-color: rgb(220, 228, 255);
