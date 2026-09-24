@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function TodoApp() {
   const [text, setText] = useState("");
-  const [todos, setTodos] = useState<string[] | never[]>([]);
+  // if todos are just strings
+  const [todos, setTodos] = useState<string[]>(() => {
+    const saved = localStorage.getItem("todos");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]); // Runs when todo changes
+
   const todos_copy = todos.slice();
 
   function handleClick() {
