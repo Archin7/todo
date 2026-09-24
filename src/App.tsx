@@ -3,7 +3,7 @@ import "./App.css";
 
 function TodoApp() {
   const [text, setText] = useState("");
-  // if todos are just strings
+
   const [todos, setTodos] = useState<string[]>(() => {
     const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : [];
