@@ -37,15 +37,24 @@ function TodoApp() {
   });
 
   return (
-    <>
+    <div>
       <div className="todos">
         <ol>{todos_list}</ol>
       </div>
-      <div className="add-todos">
-        <input type="text" onChange={(e) => setText(e.target.value)} />
-        <button onClick={handleClick}>Add</button>
+      <div className="flex">
+        <input
+          type="text"
+          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 text-slate-800 font-medium"
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button
+          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 cursor-pointer text-slate-800 font-medium"
+          onClick={handleClick}
+        >
+          Add
+        </button>
       </div>
-    </>
+    </div>
   );
 }
 
