@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { IoMdClose } from "react-icons/io";
 import "./App.css";
 
 function TodoApp() {
@@ -22,33 +23,32 @@ function TodoApp() {
 
   const todos_list = todos.map((todo, index) => {
     return (
-      <li key={index}>
-        <div className="todo">
-          <button
-            className="remove-todo"
-            onClick={() => setTodos(todos.filter((_, i) => i !== index))}
-          >
-            X
-          </button>{" "}
-          {todo}
-        </div>
+      <li key={index} className="flex items-center justify-center">
+        <button
+          className="m-2 h-6 w-6 rounded-2xl bg-red-500 text-slate-800 outline-2 outline-slate-800 duration-200 hover:bg-red-400"
+          onClick={() => setTodos(todos.filter((_, i) => i !== index))}
+        >
+          <IoMdClose size={24} />
+        </button>
+
+        <span className="font-medium text-slate-800">{todo}</span>
       </li>
     );
   });
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-screen">
       <div className="todos">
         <ol>{todos_list}</ol>
       </div>
       <div className="flex">
         <input
           type="text"
-          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 text-slate-800 font-medium"
+          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 text-slate-800 font-medium duration-200 hover:bg-slate-300"
           onChange={(e) => setText(e.target.value)}
         />
         <button
-          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 cursor-pointer text-slate-800 font-medium"
+          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 cursor-pointer text-slate-800 font-medium duration-200 hover:bg-slate-300"
           onClick={handleClick}
         >
           Add
