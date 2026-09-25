@@ -4,6 +4,7 @@ import "./App.css";
 
 function TodoApp() {
   const [text, setText] = useState("");
+  const [removing, setRemoving] = useState<number | null>(null);
 
   const [todos, setTodos] = useState<string[]>(() => {
     const saved = localStorage.getItem("todos");
@@ -25,15 +26,29 @@ function TodoApp() {
 
   const todos_list = todos.map((todo, index) => {
     return (
-      <li key={index} className="flex items-center justify-center px-4 py-2 ">
+      <li
+        key={index}
+        className={`flex items-center justify-center px-4 py-2 ${
+          removing === index
+            ? "animate-[todo-out_500ms_ease-in]"
+            : "animate-[todo-in_500ms_ease-out]"
+        }`}
+      >
         <button
-          className="m-2 h-6 w-6 rounded-2xl bg-red-500/70 text-sky-950 outline-2 outline-sky-950 cursor-pointer duration-200 hover:bg-red-400 active:scale-100 hover:scale-110 hover:shadow-lg shadow-gray-900/25"
-          onClick={() => setTodos(todos.filter((_, i) => i !== index))}
+          className="m-2 h-6 w-6 rounded-2xl bg-red-500/70 text-white/80 cursor-pointer duration-200 hover:bg-red-400 active:scale-100 hover:scale-110 hover:shadow-lg shadow-gray-900/25"
+          onClick={() => {
+            setRemoving(index);
+
+            setTimeout(() => {
+              setTodos(todos.filter((_, i) => i !== index));
+              setRemoving(null);
+            }, 500);
+          }}
         >
           <IoMdClose size={24} />
         </button>
 
-        <span className="font-medium text-sky-950">{todo}</span>
+        <span className="font-medium text-sky-950/50">{todo}</span>
       </li>
     );
   });
