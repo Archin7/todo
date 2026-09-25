@@ -25,9 +25,9 @@ function TodoApp() {
 
   const todos_list = todos.map((todo, index) => {
     return (
-      <li key={index} className="flex items-center justify-center">
+      <li key={index} className="flex items-center justify-center px-4 py-2 ">
         <button
-          className="m-2 h-6 w-6 rounded-2xl bg-red-500 text-sky-950 outline-2 outline-sky-950 cursor-pointer duration-200 hover:bg-red-400"
+          className="m-2 h-6 w-6 rounded-2xl bg-red-500/70 text-sky-950 outline-2 outline-sky-950 cursor-pointer duration-200 hover:bg-red-400 active:scale-100 hover:scale-110 hover:shadow-lg shadow-gray-900/25"
           onClick={() => setTodos(todos.filter((_, i) => i !== index))}
         >
           <IoMdClose size={24} />
@@ -39,19 +39,23 @@ function TodoApp() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen shadow-2xl">
       <div className="todos">
-        <ol>{todos_list}</ol>
+        {todos.length > 0 && (
+          <ol className="flex flex-col gap-1 m-1 rounded-xl bg-white/40 px-3 py-2 backdrop-blur-sm duration-200 hover:shadow-lg shadow-gray-900/25">
+            {todos_list}
+          </ol>
+        )}
       </div>
       <div className="flex">
         <input
           type="text"
-          className="outline-2 outline-sky-950 m-2 p-1 rounded-2xl bg-sky-300 text-sky-950 font-medium duration-200 hover:bg-sky-200"
+          className="transition  m-2 p-1 rounded-2xl bg-white/40 backdrop-blur-sm text-sky-950/50 font-medium duration-200 hover:bg-white/70 hover:shadow-lg shadow-gray-900/25"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <button
-          className="outline-2 outline-sky-950 m-2 p-1 rounded-2xl bg-sky-300 cursor-pointer text-sky-950 font-medium duration-200 hover:bg-sky-200"
+          className="transition  m-2 p-1 rounded-2xl bg-white/40 cursor-pointer text-sky-950/50 text-ms font-medium duration-200 hover:bg-white/70 active:scale-100 hover:scale-110 hover:shadow-lg shadow-gray-900/25"
           onClick={handleClick}
         >
           Add
