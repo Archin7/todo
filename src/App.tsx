@@ -14,9 +14,11 @@ function TodoApp() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]); // Runs when todo changes
 
-  const todos_copy = todos.slice();
-
   function handleClick() {
+    if (!text) {
+      return;
+    }
+
     setTodos([...todos, text]);
     setText("");
   }
@@ -25,13 +27,13 @@ function TodoApp() {
     return (
       <li key={index} className="flex items-center justify-center">
         <button
-          className="m-2 h-6 w-6 rounded-2xl bg-red-500 text-slate-800 outline-2 outline-slate-800 cursor-pointer duration-200 hover:bg-red-400"
+          className="m-2 h-6 w-6 rounded-2xl bg-red-500 text-sky-950 outline-2 outline-sky-950 cursor-pointer duration-200 hover:bg-red-400"
           onClick={() => setTodos(todos.filter((_, i) => i !== index))}
         >
           <IoMdClose size={24} />
         </button>
 
-        <span className="font-medium text-slate-800">{todo}</span>
+        <span className="font-medium text-sky-950">{todo}</span>
       </li>
     );
   });
@@ -44,12 +46,12 @@ function TodoApp() {
       <div className="flex">
         <input
           type="text"
-          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 text-slate-800 font-medium duration-200 hover:bg-slate-300"
+          className="outline-2 outline-sky-950 m-2 p-1 rounded-2xl bg-sky-300 text-sky-950 font-medium duration-200 hover:bg-sky-200"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <button
-          className="outline-2 outline-slate-800 m-2 p-1 rounded-2xl bg-slate-400 cursor-pointer text-slate-800 font-medium duration-200 hover:bg-slate-300"
+          className="outline-2 outline-sky-950 m-2 p-1 rounded-2xl bg-sky-300 cursor-pointer text-sky-950 font-medium duration-200 hover:bg-sky-200"
           onClick={handleClick}
         >
           Add
