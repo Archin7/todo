@@ -1,7 +1,38 @@
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import type { KeyboardEvent } from "react";
 import "./App.css";
+
+function TodoAdd({
+  text,
+  handleClick,
+  onChange,
+}: {
+  text: string;
+  handleClick: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
+  return (
+    <>
+      <input
+        type="text"
+        className="transition  m-2 p-1 rounded-2xl bg-white/40 backdrop-blur-sm text-sky-950/50 font-medium duration-200 hover:bg-white/70 hover:shadow-lg shadow-gray-900/25"
+        value={text}
+        onChange={onChange}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            handleClick();
+          }
+        }}
+      />
+      <button
+        className="transition  m-2 p-1 rounded-2xl bg-white/40 cursor-pointer text-sky-950/50 text-ms font-medium duration-200 hover:bg-white/70 active:scale-100 hover:scale-110 hover:shadow-lg shadow-gray-900/25"
+        onClick={handleClick}
+      >
+        Add
+      </button>
+    </>
+  );
+}
 
 function TodoApp() {
   const [text, setText] = useState("");
@@ -11,12 +42,6 @@ function TodoApp() {
     const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : [];
   });
-
-  function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter") {
-      handleClick();
-    }
-  }
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -69,20 +94,12 @@ function TodoApp() {
           </ol>
         )}
       </div>
-      <div className="flex">
-        <input
-          type="text"
-          className="transition  m-2 p-1 rounded-2xl bg-white/40 backdrop-blur-sm text-sky-950/50 font-medium duration-200 hover:bg-white/70 hover:shadow-lg shadow-gray-900/25"
-          value={text}
+      <div className="flex flex-row">
+        <TodoAdd
+          text={text}
+          handleClick={handleClick}
           onChange={(e) => setText(e.target.value)}
-          onKeyDown={handleKeyDown}
         />
-        <button
-          className="transition  m-2 p-1 rounded-2xl bg-white/40 cursor-pointer text-sky-950/50 text-ms font-medium duration-200 hover:bg-white/70 active:scale-100 hover:scale-110 hover:shadow-lg shadow-gray-900/25"
-          onClick={handleClick}
-        >
-          Add
-        </button>
       </div>
     </div>
   );
